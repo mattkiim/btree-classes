@@ -100,5 +100,5 @@
 ## Core Packages
 - **Gymnasium** — standardized environments (Blackjack, FrozenLake, CliffWalking, MountainCar, CartPole, LunarLander, BipedalWalker)
 - **Custom environments** — Gridworld and bandits, hand-built for full transparency in early units
-- **Stable-Baselines3** — for PPO in Week 13, so students focus on interpretation rather than from-scratch implementation
+- **Stable-Baselines3** — for PPO in Week 13
 - **Matplotlib** — value heatmaps, training curves, rendered rollouts throughout
