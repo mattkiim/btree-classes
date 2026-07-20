@@ -44,7 +44,7 @@ For a fully observed static maze, `(row, column)` is enough. If a locked door
 stays open after collecting a key, location alone is not enough; the state must
 also record whether the key was collected.
 
-### Inline exercise
+### Inline exercise 1
 
 For a game with a one-use shield, propose a Markov state. What goes wrong if the
 state stores only the player's location?
@@ -97,7 +97,7 @@ def transition(state, action, rows, cols, walls, goal, pit):
     return candidate, reward, done
 ```
 
-### Inline exercise
+### Inline exercise 2
 
 Predict `transition((0, 0), "UP", ...)` and
 `transition((3, 4), "DOWN", ...)` for the displayed map.
@@ -154,7 +154,7 @@ def rollout(env, policy, max_steps=50):
 The maximum prevents a bad policy from looping forever. It is an experiment
 safety limit, not a terminal state in the MDP.
 
-### Inline exercise
+### Inline exercise 3
 
 Create a policy that repeatedly hits a wall. How can you recognize the failure
 from its trajectory without seeing a picture?

@@ -47,7 +47,7 @@ $$
 The difference $R-Q(a)$ is a prediction error: positive means the reward was
 better than expected.
 
-### Inline exercise
+### Inline exercise 1
 
 Suppose an arm's estimate is 4 after two pulls and its next reward is 7. Compute
 the new estimate before running any code.
@@ -78,7 +78,7 @@ print([round(bandit.step(2), 2) for _ in range(5)])
 
 The best arm does not win every pull. RL must learn from noisy evidence.
 
-### Inline exercise
+### Inline exercise 2
 
 Change `reward_std` to `0.1`, then `3.0`. Predict which setting makes learning
 harder, and explain why.
@@ -114,7 +114,7 @@ class EpsilonGreedyAgent:
         self.q[action] += (reward - self.q[action]) / self.counts[action]
 ```
 
-### Inline exercise
+### Inline exercise 3
 
 Run with `epsilon=0`, `0.1`, and `1`. Describe the policy represented by each
 extreme before looking at its reward.
@@ -166,7 +166,7 @@ The oracle benchmark always chooses the true best arm. It is not a learnable
 policy—the agent is not told the means—but it shows what perfect knowledge could
 earn. **Regret** is the reward lost compared with that benchmark.
 
-### Inline exercise
+### Inline exercise 4
 
 Try 20 arms or only 20 steps. Does the best epsilon change? State a hypothesis
 before running the experiment.

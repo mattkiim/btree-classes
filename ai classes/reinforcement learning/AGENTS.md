@@ -21,8 +21,10 @@ in structure, tone, and difficulty progression.
     ├── exercises/
     │   ├── exercise1.md
     │   ├── exercise2.md
-    │   ├── exercise3.md
+    │   ├── ... (as many exercises as the topic needs)
     │   └── project.py
+    ├── solutions/
+    │   └── project_solution.py
     └── stretch/
         └── exercise.md
 ```
@@ -51,31 +53,59 @@ bandits lesson plan already in this repo. Should include:
 - A short preview of the next topic
 - A "common misconceptions to watch for" section for the instructor
 
-### `exercises/exercise1.md`, `exercise2.md`, `exercise3.md`
-A **progressive build sequence** — not three unrelated problems. Each
-exercise should extend the previous one's code/environment, culminating in
-`project.py`. Concretely:
-- `exercise1.md` — scaffold the core environment or data structure for
-  the topic (e.g., "implement the bandit environment class")
-- `exercise2.md` — implement the core algorithm against that scaffold
-  (e.g., "implement epsilon-greedy agent, run it, plot results")
-- `exercise3.md` — extend or stress-test it (e.g., "compare 3 exploration
-  strategies," "test non-stationary rewards," "add a second algorithm to
-  compare against")
+### `exercises/exerciseN.md`
+A **progressive build sequence**, not a collection of unrelated problems.
+Choose the number of core exercises that creates meaningful implementation
+checkpoints; do not force every topic into exactly three. Each exercise should
+extend the previous one's code/environment, culminating in `project.py`.
+Typically, the sequence should:
+- scaffold the core environment or data structure;
+- implement the core algorithm against that scaffold;
+- when the topic warrants it, extend, compare, visualize, or stress-test the
+  implementation in one or more later exercises.
+
+Two exercises may be sufficient for a tightly connected topic, while a topic
+with multiple substantial algorithms may need three or more.
 - Each `exerciseN.md` should state: objective, starter guidance (not full
   starter code — that belongs in `project.py`), and what a working
   submission demonstrates
 
 ### `exercises/project.py`
 The **starter code file** students actually work in, corresponding to the
-combined result of exercises 1–3. Contains:
+combined result of all core exercises for that week. Contains:
 - Class/function scaffolding with `# TODO` markers matching the exercise
-  steps (so `exercise1.md`'s TODOs live at the top, `exercise3.md`'s near
-  the bottom)
+  steps, ordered so earlier exercises' TODOs appear before later ones
 - Enough structure that students aren't starting from a blank file, but
   not so much that the exercises become fill-in-the-blank trivia
 - A `if __name__ == "__main__":` block that runs experiments and produces
   plots, matching the pattern used in `week01-bandits`
+
+### `solutions/project_solution.py`
+The **cumulative reference solution** for that week's core exercises. Contains:
+- A complete implementation of every TODO in `exercises/project.py`, preserving
+  the starter file's public class names, function signatures, and experiment
+  structure so the two files are easy to compare
+- Brief comments at the important algorithmic steps, without turning every
+  line into an explanation
+- A runnable `if __name__ == "__main__":` demonstration matching the starter
+  project
+- No answers to the optional stretch exercise unless the instructor explicitly
+  requests stretch solutions
+
+### `solutions/inline_exercises.md`
+The **instructor-facing answer key** for every small inline exercise in
+`lecture.md`. It should:
+- use the same exercise numbers and order as the lecture;
+- give the expected answer, calculation, or observation, plus a brief reason;
+- distinguish predictions from results that depend on randomness or experiment
+  settings;
+- stay out of `lecture.md` so the student-facing lecture can be distributed
+  without answers.
+
+When a week uses a variable number of exercises, the one solution file still
+covers all core exercises in their stated progression. Keep solutions out of
+the `exercises/` directory so instructors can distribute starter materials
+without accidentally including answers.
 
 ### `stretch/exercise.md`
 One **optional, harder, self-contained** exercise — not required to
@@ -87,7 +117,7 @@ challenge. Should:
 - Often previews a concept from a *later* week (e.g., Week 1's stretch
   exercise on decaying epsilon previews adaptive exploration; Week 7's
   stretch exercise might preview function approximation)
-- Be gradeable/completable independently of exercises 1–3
+- Be gradeable/completable independently of the core exercise sequence
 
 ---
 
@@ -107,13 +137,13 @@ challenge. Should:
   observation over derivation, unless the instructor specifically
   requests a math-heavy version (as with the bandit regret-bound
   discussion already produced for Week 1).
-- Every `project.py` should run end-to-end with **all TODOs
-  implemented** as a sanity check before being committed — i.e. generate
-  and privately verify a solved version, then strip it back down to the
-  TODO'd starter version for the actual file in this repo.
-- Do not include solved/answer versions of `project.py` in this repo
-  unless a topic directory explicitly has a `solutions/` subfolder
-  requested by the instructor — keep the repo student-facing by default.
+- Every `solutions/project_solution.py` should run end-to-end as a sanity check
+  before materials are considered complete. The corresponding
+  `exercises/project.py` must retain its student-facing TODOs.
+- Every numbered inline exercise in `lecture.md` should have a matching entry
+  in `solutions/inline_exercises.md`.
+- Core solution files are instructor-facing. Do not place answers directly in
+  `exercises/project.py` or `stretch/exercise.md`.
 
 ---
 
