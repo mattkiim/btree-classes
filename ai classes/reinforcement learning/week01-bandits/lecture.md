@@ -2,27 +2,25 @@
 
 ## Learning objectives
 
-By the end of class, students can:
 
 - identify an agent, actions, and rewards in a problem;
 - explain exploration and exploitation in their own words;
 - implement a multi-armed bandit and an epsilon-greedy agent;
 - use repeated trials and plots to compare policies fairly.
 
-## Hook: which button would you press?
+## Which button would you press?
 
 Imagine three unlabeled buttons. Every press awards a random number of points,
 and you get 100 presses. How would you decide which button to use?
 
-Discuss: Is it ever sensible to press a button that currently looks worse? What
-information would you record? What does “best” mean when rewards are random?
+Discuss: Would you ever press a button that currently looks worse? What information would you record? What does “best” mean when rewards are random?
 
 ## The reinforcement-learning loop
 
 Reinforcement learning (RL) studies how an **agent** learns through interaction.
 At each step, the agent observes a situation, chooses an **action**, and receives
 a numerical **reward** from the **environment**. The agent's rule for choosing
-actions is its **policy**.
+actions is its **policy**, commonly denoted as $\pi$.
 
 In a bandit there is only one situation, so we omit state:
 
