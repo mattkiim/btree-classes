@@ -23,7 +23,7 @@ button 1 usually gives about 5 points
 button 2 usually gives about 3 points
 ```
 
-![alt text](buttons.png)
+![alt text](images/buttons.png)
 
 The goal is to accumulate the highest number of points. 
 
@@ -78,7 +78,7 @@ reward?
 A slot machine was once called a “one-armed bandit.” A machine with several
 choices is therefore called a **multi-armed bandit**.
 
-![alt text](slot-machine.png)
+![alt text](images/slot-machine.png)
 
 In our code:
 
@@ -154,7 +154,7 @@ print(bandit.pull(1))
 
 Explain what each output means.
 
-## Version 2: Random Numbers
+## Version 2: Non-Deterministic (Stochastic) Buttons
 
 Real choices do not always have exactly the same result. We will let each
 button's reward vary.
