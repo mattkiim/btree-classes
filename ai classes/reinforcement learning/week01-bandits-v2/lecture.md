@@ -57,7 +57,7 @@ is the number of points returned by a button.
 ### Agent
 
 An **agent** is the entity that chooses an action. For now, a person is the
-agent. The mystery-button machine is not the agent; it only responds. 
+agent. The mystery-button machine is not the agent; it only responds to the agent's actions. 
 
 The whole interaction is:
 
@@ -75,8 +75,10 @@ reward?
 
 ## Bandits
 
+A machine known as multi-armed bandits is the initial example we will use to teach reinforcement learning due to its simplicity. 
+
 A slot machine was once called a “one-armed bandit.” A machine with several
-choices is therefore called a **multi-armed bandit**.
+choices is therefore called a **multi-armed bandit**. The multi-armed bandit is the environment we will eventually teach an agent to interact with.
 
 ![alt text](images/slot-machine.png)
 
