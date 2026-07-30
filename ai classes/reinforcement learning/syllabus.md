@@ -8,8 +8,8 @@
 ## Week 1 — What is RL?
 - **Concepts:** agents, actions, rewards, exploration vs. exploitation
 - **Environment:** custom multi-armed bandit simulator (no state, just action → reward)
-- **Activity:** implement epsilon-greedy agent, plot cumulative reward vs. greedy baseline
-- **Deliverable:** short write-up comparing exploration strategies on the bandit
+- **Activity:** build a bandit one arm at a time, then sample and visualize its rewards
+- **Deliverable:** working multi-armed bandit environment + short observations about reward noise
 
 ## Week 2 — Markov Decision Processes
 - **Concepts:** states, actions, transitions, rewards, the Markov property

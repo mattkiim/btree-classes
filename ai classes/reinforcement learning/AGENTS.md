@@ -145,6 +145,49 @@ challenge. Should:
 - Core solution files are instructor-facing. Do not place answers directly in
   `exercises/project.py` or `stretch/exercise.md`.
 
+## Teaching style and pacing
+
+Assume students know Python fundamentals, but do not assume they know the
+mathematics or technical language of reinforcement learning.
+
+- **Prefer plain language.** Avoid jargon when an ordinary word communicates
+  the idea accurately. When a technical term is necessary, explain the idea in
+  familiar language first, introduce the term second, and continue connecting
+  the term to that explanation.
+- **Distinguish literal and technical meanings.** If a word such as “state,”
+  “action,” “value,” “reward,” “policy,” or “environment” has both an everyday
+  meaning and a specific meaning in reinforcement learning, say explicitly
+  which meaning is being used. Give a concrete example of both meanings when
+  that would prevent confusion.
+- **Make code map to the explanation.** Present code in the same order as the
+  English explanation. Use names and small abstractions that represent the
+  concepts students have just learned. A student who reads a sentence and then
+  the corresponding code should be able to point to where that idea appears.
+- **Choose understandable abstractions.** Introduce classes, functions, and
+  data structures because they make the example easier to reason about, not
+  merely because they are conventional in professional implementations.
+  Explain what each abstraction represents before extending it.
+- **Do not use math as a prerequisite.** Build intuition with concrete
+  examples, tables, traces, drawings, or repeated observations before using a
+  formula. If a formula is useful, define every symbol in plain language and
+  connect each part to code or a worked numerical example.
+- **Keep a topic backlog.** When a useful idea would overload the current
+  lesson, put it in a clearly labeled “Later” or “Topic backlog” note instead
+  of teaching it immediately. Briefly say why the idea matters and when the
+  course will return to it. Do not let the backlog interrupt the current
+  learning goal.
+- **Teach one conceptual step at a time.** Do not rush to a complete algorithm
+  or formal framework. Let students predict, run, inspect, and explain one
+  small behavior before adding the next idea.
+- **Use pedagogical examples.** Examples should isolate the concept being
+  taught, use small numbers or short traces that can be checked by hand, and
+  make the expected observation clear. Add complexity only after the simple
+  version is understood.
+- **Limit each week's core project.** The project should apply the few ideas
+  developed during that week, not preview several later weeks at once. Move
+  nonessential extensions to the topic backlog or the optional stretch
+  exercise.
+
 ---
 
 ## Topic list (week → directory slug)
