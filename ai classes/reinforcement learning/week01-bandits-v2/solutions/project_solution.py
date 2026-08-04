@@ -10,21 +10,21 @@ class Bandit:
         self.typical_rewards = list(typical_rewards)
         self.number_of_arms = len(self.typical_rewards)
 
-        if self.number_of_arms == 0:
-            raise ValueError("A bandit needs at least one arm.")
-        if reward_spread < 0:
-            raise ValueError("reward_spread cannot be negative.")
+        # if self.number_of_arms == 0:
+        #     raise ValueError("A bandit needs at least one arm.")
+        # if reward_spread < 0:
+        #     raise ValueError("reward_spread cannot be negative.")
 
         self.reward_spread = reward_spread
         self.randomizer = Random(seed)
 
     def pull(self, arm):
-        if not isinstance(arm, int):
-            raise TypeError("The arm must be an integer.")
-        if arm < 0 or arm >= self.number_of_arms:
-            raise ValueError(
-                f"Choose an arm from 0 through {self.number_of_arms - 1}."
-            )
+        # if not isinstance(arm, int):
+        #     raise TypeError("The arm must be an integer.")
+        # if arm < 0 or arm >= self.number_of_arms:
+        #     raise ValueError(
+        #         f"Choose an arm from 0 through {self.number_of_arms - 1}."
+        #     )
 
         typical_reward = self.typical_rewards[arm]
         reward = self.randomizer.gauss(typical_reward, self.reward_spread)
@@ -33,8 +33,8 @@ class Bandit:
 
 def try_every_arm(bandit, pulls_per_arm):
     """Return one list of observed rewards for each arm."""
-    if not isinstance(pulls_per_arm, int) or pulls_per_arm <= 0:
-        raise ValueError("pulls_per_arm must be a positive integer.")
+    # if not isinstance(pulls_per_arm, int) or pulls_per_arm <= 0:
+    #     raise ValueError("pulls_per_arm must be a positive integer.")
 
     all_rewards = []
 

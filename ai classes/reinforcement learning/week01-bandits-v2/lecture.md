@@ -2,16 +2,16 @@
 
 ## Goal
 
-We will build a small Python program with several buttons that give random rewards (mystery-button machine). 
+We will build a Python program with  several buttons that give random rewards (mystery-button machine). 
 
 By the end of the week, you will be able to:
 
-- point to the chooser, the choice, and the points in the example;
+- identify the decision-maker, the decision, and the points in the example;
 - explain why one button can return different points on different tries;
 - implement the mystery-button machine as a Python class;
 - try each button many times and describe what you observe.
 
-We are essentially building a world that responds to choices.
+Put simply, we are building a machine that responds to decisions.
 
 ## Example
 
@@ -25,7 +25,7 @@ button 2 usually gives about 3 points
 
 ![alt text](images/buttons.png)
 
-The goal is to accumulate the highest number of points. 
+The goal is to accumulate the highest number of points in 100 button presses. 
 
 Before writing code, discuss:
 
@@ -33,8 +33,7 @@ Before writing code, discuss:
 2. Would one try tell you enough?
 3. What would you write down after each try?
 
-There is no single correct plan yet. Today our program will only make the
-buttons work.
+The program we will write today will setup this button machine.
 
 ## Preliminary Terms
 
@@ -45,14 +44,12 @@ choice and responds. Our mystery-button machine is the environment.
 
 ### Action
 
-When making food, there are choices you have to make, such as which ingredients to select. In reinforcement learning, an **action** is a choice sent to the environment.
+When making food, there are also choices you have to make, such as which ingredients to select. In reinforcement learning, an **action** is a choice sent to the environment.
 Here, the action is a button number such as `0`, `1`, or `2`.
 
 ### Reward
 
-When you make food that tastes good, you might feel rewarded for your efforts. In reinforcement learning, a **reward** is simply a number returned by the
-environment. It can be positive, zero, or negative. In our example, the reward
-is the number of points returned by a button.
+After cooking, you taste the food. If the food tastes good, you will probably feel rewarded for your efforts. In reinforcement learning, a **reward** is simply a number returned by the environment. It can be positive, zero, or negative. In our example, the reward is the number of points returned by a button.
 
 ### Agent
 
@@ -66,7 +63,7 @@ person chooses a button → machine returns points
 agent chooses an action → environment returns a reward
 ```
 
-### Inline exercise 1
+### Inline exercise 1 (not related to the button machine)
 
 A game character chooses `left`, and the game returns `-1` point.
 
@@ -96,38 +93,32 @@ We will first build a version with no randomness. Each button always returns the
 same points.
 
 ```python
-# Define what every Bandit object should remember and do.
 class Bandit:
-    # This setup runs when we create a new Bandit.
     def __init__(self, button_rewards):
-        # Remember how many points each button gives.
-        self.button_rewards = button_rewards
+        self.button_rewards = button_rewards # store how many points each button gives
 
-        # Count how many buttons the machine has.
-        self.number_of_arms = len(button_rewards)
+        self.number_of_arms = len(button_rewards) # store the number of buttons a machine has
 
-    # This method runs when a person chooses one arm.
     def pull(self, arm):
-        # "arm" is the number of the button the person chose.
+      '''
+      returns points on arm pull
+      '''
+        reward = self.button_rewards[arm] 
 
-        # Look up the points for that button.
-        reward = self.button_rewards[arm]
-
-        # Give those points back to the person.
         return reward
 ```
 
 Now use it:
 
 ```python
-# Create a machine whose three buttons give 2, 5, and 3 points.
+# create a machine whose three buttons give 2, 5, and 3 points
 bandit = Bandit([2.0, 5.0, 3.0])
 
-# Pull button 0 once.
-print(bandit.pull(0))
+# pull button once
+print(bandit.pull(0)) 
 
-# Pull button 1 twice.
-print(bandit.pull(1))
+# pull button twice
+print(bandit.pull(1)) 
 print(bandit.pull(1))
 ```
 
@@ -164,17 +155,15 @@ button's reward vary.
 Python's `random` module can do this:
 
 ```python
-# Import Python's random-number tool.
+# Python's random number tool
 from random import Random
 
-# Create a random-number generator.
-# The seed 7 lets us repeat the same sequence later.
+# random-number generator with seed
 randomizer = Random(7)
 
-# Ask for a number usually near 5.0, with a spread of about 1.0.
+# randomly pull from a distribution with mean 5 and std 1
 reward = randomizer.gauss(5.0, 1.0)
 
-# Show the reward that was generated.
 print(reward)
 ```
 
@@ -191,39 +180,37 @@ inputs have jobs we can understand:
 Here is the matching change to `Bandit`:
 
 ```python
-# Import the tool that will make the rewards vary.
 from random import Random
 
-
-# Define the new version of the Bandit.
 class Bandit:
-    # Set up one Bandit with its rewards, spread, and optional seed.
+  '''
+  bandit with random rewards
+  '''
     def __init__(self, typical_rewards, reward_spread=1.0, seed=None):
-        # Remember the typical reward for every arm.
+
         self.typical_rewards = typical_rewards
 
-        # Count how many arms the machine has.
         self.number_of_arms = len(typical_rewards)
 
-        # Remember how much the rewards should vary.
+        # store how much arms should vary
         self.reward_spread = reward_spread
 
-        # Give this bandit its own repeatable random-number generator.
+        # store seed for reproducibility
         self.randomizer = Random(seed)
 
-    # Return one varying reward for the chosen arm.
+
     def pull(self, arm):
-        # Look up the typical reward for the chosen arm.
+      '''
+      return one random reward for chosen arm
+      '''
         typical_reward = self.typical_rewards[arm]
 
-        # Make one reward near that typical value.
         reward = self.randomizer.gauss(typical_reward, self.reward_spread)
 
-        # Return the reward to whoever chose the arm.
         return reward
 ```
 
-Setting `reward_spread=0.0` brings back the predictable version.
+What happens if you set `reward_spread=0.0`?
 
 ### Removing Randomness from Randomness
 
@@ -253,31 +240,27 @@ One result can be unusually high or low. Repeating a pull gives us more
 evidence about what the button usually does.
 
 ```python
-# Create a three-arm bandit.
+# three-arm bandit
 bandit = Bandit([2.0, 5.0, 3.0], reward_spread=1.0, seed=7)
 
-# Start an empty list where we can record what happens.
+# record rewards
 observed_rewards = []
 
-# Repeat the indented code five times.
 for _ in range(5):
-    # Pull arm 1.
-    reward = bandit.pull(1)
+    reward = bandit.pull(1) # pull arm 1 5 times
 
-    # Add the new reward to our record.
+    # Add the new reward to our list
     observed_rewards.append(reward)
 
-# Show all five recorded rewards.
 print(observed_rewards)
 ```
 
 The list is our record of what happened. We can summarize it with an average:
 
 ```python
-# Add the rewards together, then divide by the number of rewards.
+
 average_reward = sum(observed_rewards) / len(observed_rewards)
 
-# Show the average.
 print(average_reward)
 ```
 
