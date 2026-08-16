@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-labelledby="title description">
+  <title id="title">Three-by-three Gridworld map</title>
+  <desc id="description">A Gridworld with a start in the upper left, a positive goal in the upper right, a wall in the center, and a negative trap in the lower right.</desc>
+  <rect width="900" height="520" fill="#f8fafc"/>
+  <text x="450" y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#172033">Week 3 Gridworld</text>
+
+  <g transform="translate(180 85)" stroke="#334155" stroke-width="4">
+    <rect x="0" y="0" width="180" height="120" fill="#bfdbfe"/>
+    <rect x="180" y="0" width="180" height="120" fill="#ffffff"/>
+    <rect x="360" y="0" width="180" height="120" fill="#bbf7d0"/>
+    <rect x="0" y="120" width="180" height="120" fill="#ffffff"/>
+    <rect x="180" y="120" width="180" height="120" fill="#475569"/>
+    <rect x="360" y="120" width="180" height="120" fill="#ffffff"/>
+    <rect x="0" y="240" width="180" height="120" fill="#ffffff"/>
+    <rect x="180" y="240" width="180" height="120" fill="#ffffff"/>
+    <rect x="360" y="240" width="180" height="120" fill="#fecaca"/>
+  </g>
+
+  <g font-family="Arial, sans-serif" text-anchor="middle" fill="#172033">
+    <text x="270" y="138" font-size="28" font-weight="700">START</text>
+    <text x="270" y="172" font-size="21">(0, 0)</text>
+    <text x="450" y="150" font-size="22">(0, 1)</text>
+    <text x="630" y="132" font-size="28" font-weight="700">GOAL</text>
+    <text x="630" y="164" font-size="23">+10</text>
+    <text x="630" y="190" font-size="19">(0, 2)</text>
+
+    <text x="270" y="270" font-size="22">(1, 0)</text>
+    <text x="450" y="255" font-size="30" font-weight="700" fill="#ffffff">WALL</text>
+    <text x="450" y="287" font-size="19" fill="#ffffff">(1, 1)</text>
+    <text x="630" y="270" font-size="22">(1, 2)</text>
+
+    <text x="270" y="390" font-size="22">(2, 0)</text>
+    <text x="450" y="390" font-size="22">(2, 1)</text>
+    <text x="630" y="372" font-size="28" font-weight="700">TRAP</text>
+    <text x="630" y="404" font-size="23">-10</text>
+    <text x="630" y="430" font-size="19">(2, 2)</text>
+  </g>
+
+  <g font-family="Arial, sans-serif" font-size="18" fill="#475569">
+    <text x="92" y="155">row 0</text>
+    <text x="92" y="275">row 1</text>
+    <text x="92" y="395">row 2</text>
+    <text x="270" y="475" text-anchor="middle">column 0</text>
+    <text x="450" y="475" text-anchor="middle">column 1</text>
+    <text x="630" y="475" text-anchor="middle">column 2</text>
+  </g>
+</svg>
