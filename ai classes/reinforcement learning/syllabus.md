@@ -1,104 +1,173 @@
 # High-School Reinforcement Learning Syllabus
 
-**Format:** ~15-30 weeks, 1-2 units per week \
-**Approach:** Each week/lession involves training or evaluating a policy. 
+**Format:** Approximately 15–30 weeks, depending on whether each unit takes
+one or two class meetings.
+
+**Assumed background:** Python fundamentals; no prior reinforcement-learning
+or mathematics background.
+
+**Approach:** Build an environment first, inspect its behavior, and then add
+one learning idea at a time. Code, small examples, and observable results come
+before formal notation.
 
 ---
 
-## Week 1 — What is RL?
-- **Concepts:** agents, actions, rewards, exploration vs. exploitation
-- **Environment:** custom multi-armed bandit simulator (no state, just action → reward)
-- **Activity:** build a bandit one arm at a time, then sample and visualize its rewards
-- **Deliverable:** working multi-armed bandit environment + short observations about reward noise
+## Course throughline
 
-## Week 2 — Markov Decision Processes
-- **Concepts:** states, actions, transitions, rewards, the Markov property
-- **Environment:** hand-built 5x5 Gridworld (walls, goal, pit)
-- **Activity:** students define the MDP themselves in code (states, transition function, reward function)
-- **Deliverable:** working Gridworld MDP class
+The first six weeks form two matching sequences:
 
-## Week 3 — Value Functions and Bellman Equations
-- **Concepts:** state-value and action-value functions, the Bellman expectation equation
-- **Environment:** same Gridworld
-- **Activity:** hand-compute values for a few states, verify with code; visualize as a heatmap
-- **Deliverable:** value heatmap for a fixed policy
+```text
+Bandit environment → bandit agent
 
-## Week 4 — Bellman Optimality and Dynamic Programming
-- **Concepts:** optimal value function, policy iteration, value iteration
-- **Environment:** same Gridworld
-- **Activity:** animate value/policy convergence frame by frame
-- **Deliverable:** implementation of policy iteration and value iteration, compared side by side
+Gridworld environment → exact values → episode learning → step learning
+```
 
-## Week 5 — Monte Carlo Methods
-- **Concepts:** episodic learning, first-visit vs. every-visit MC, sample-based value estimation
-- **Environment:** Blackjack (Gymnasium)
-- **Activity:** estimate the value function of a fixed blackjack policy from simulated episodes
-- **Deliverable:** MC-estimated value function, compared to known optimal strategy
+The same small examples are reused across several weeks. This makes it easier
+to see what each new method changes without also learning a new environment.
 
-## Week 6 — Temporal-Difference Learning
-- **Concepts:** TD(0), bootstrapping, MC vs. TD tradeoffs
-- **Environment:** FrozenLake (slippery)
-- **Activity:** compare MC and TD value estimates on the same environment
-- **Deliverable:** short comparison report/plot: convergence speed and variance
+## Week 1 — Build a Multi-Armed Bandit
 
-## Week 7 — Model-Free Control: SARSA and Q-learning
-- **Concepts:** on-policy vs. off-policy control, SARSA, Q-learning
+- **Concepts:** environment, action, reward, random samples, mean, and reward spread
+- **Environment:** a three-button bandit that returns coins
+- **Activity:** build deterministic buttons first, then improve them so rewards can vary
+- **Deliverable:** a working bandit environment and graphs of sampled rewards
+- **Materials:** `week01-bandits`
+
+## Week 2 — Train an Agent on the Bandit
+
+- **Concepts:** agent memory, reward estimates, exploration, exploitation, and a training loop
+- **Environment:** the Week 1 bandit
+- **Activity:** record rewards, estimate each button, and let an agent choose buttons automatically
+- **Deliverable:** a trained bandit agent with estimate and action-count graphs
+- **Materials:** `week02-bandit-agent-v1`
+
+## Week 3 — Build a Gridworld Environment
+
+- **Concepts:** state, action, transition, terminal state, episode, and reset
+- **Environment:** a deterministic three-by-three Gridworld with a wall, goal, and trap
+- **Activity:** represent locations, apply movement rules, and record complete paths
+- **Deliverable:** a Gridworld that returns next state, reward, and an ending signal
+- **Materials:** `week03-gridworld-v1`
+
+## Week 4 — Understand State Values
+
+- **Concepts:** fixed policy, immediate reward, return, expected future reward, and state value
+- **Environment:** the Week 3 Gridworld
+- **Activity:** follow one deterministic policy, calculate returns backward, and evaluate every open state
+- **Deliverable:** an exact state-value map for a fixed policy
+- **Materials:** `week04-state-values-v1`
+
+## Week 5 — Learn State Values from Complete Episodes
+
+- **Concepts:** return samples, value estimates, sample counts, complete-episode learning, and Monte Carlo learning
+- **Environment:** the same Gridworld with a policy that can take one of two routes
+- **Activity:** collect complete episodes and average the observed returns for each visited state
+- **Deliverable:** a state-value learner and a graph of its starting-state estimate
+- **Materials:** `week05-state-value-learning-v1`
+
+## Week 6 — Learn State Values After Each Step
+
+- **Concepts:** one-step target, learning rate, update gap, temporal-difference learning, and bootstrapping
+- **Environment:** the same Gridworld and branching policy
+- **Activity:** update a state immediately using one reward and the next state's current estimate
+- **Deliverable:** a step-by-step value learner and a comparison with complete-episode learning
+- **Materials:** `week06-step-value-learning-v1`
+
+## Week 7 — Learn Action Values and Improve a Policy
+
+- **Concepts:** state-action value, choosing among movements, exploratory choice, and Q-learning
+- **Environment:** the same Gridworld
+- **Activity:** store one estimate for each state-action pair and use those estimates to improve movement choices
+- **Deliverable:** a Gridworld agent that learns a route to the goal
+- **Planned materials:** `week07-action-values-qlearning`
+
+## Week 8 — Investigate Exploration
+
+- **Concepts:** exploration rate, decaying exploration, optimistic starting estimates, and fair comparisons
+- **Environment:** the Week 7 Gridworld agent
+- **Activity:** keep Q-learning fixed while changing only the exploration rule
+- **Deliverable:** comparison graphs and a short evidence-based explanation of the results
+- **Planned materials:** `week08-exploration`
+
+## Week 9 — Compare SARSA and Q-Learning
+
+- **Concepts:** learning from the action actually taken versus the best-looking next action
 - **Environment:** CliffWalking
-- **Activity:** train both algorithms, visualize learned paths near the cliff
-- **Deliverable:** side-by-side policy visualization + discussion of why they differ
+- **Activity:** train both agents, inspect their learned routes, and connect differences to their update targets
+- **Deliverable:** side-by-side route and reward comparisons
+- **Planned materials:** `week09-sarsa-qlearning`
 
-<!-- ## Week 8 — Exploration (optional)
-- **Concepts:** epsilon-greedy, decaying epsilon, UCB, optimistic initialization
-- **Environment:** CliffWalking
-- **Activity:** hold the algorithm fixed, vary only exploration strategy
-- **Deliverable:** experiment write-up on exploration strategy vs. performance
+## Week 10 — Replace a Table with Function Approximation
 
-## Week 9 — Function Approximation (optional)
-- **Concepts:** why tables break down, linear function approximation, feature representations (e.g. tile coding)
+- **Concepts:** limits of lookup tables, features, prediction from features, and generalization
 - **Environment:** MountainCar
-- **Activity:** implement linear value-function approximation by hand
-- **Deliverable:** working approximated Q-function that solves MountainCar -->
+- **Activity:** replace a state-action table with a small linear prediction function
+- **Deliverable:** a value approximation that can represent many related states
+- **Planned materials:** `week10-function-approximation`
 
-## Week 10 — Deep Q-Learning
-- **Concepts:** neural network function approximators, experience replay, target networks
-- **Environment:** CartPole (core), LunarLander (stretch)
-- **Activity:** implement or adapt a DQN, train on CartPole
-- **Deliverable:** trained CartPole agent + training curve
+## Week 11 — Deep Q-Learning
 
-## Week 11 — Policy Gradients
-- **Concepts:** direct policy optimization, REINFORCE, variance reduction (baselines)
-- **Environment:** CartPole (revisited)
-- **Activity:** implement REINFORCE, compare training dynamics to DQN on the same env
-- **Deliverable:** trained policy-gradient agent + reflection on DQN vs. policy gradient differences
+- **Concepts:** neural-network value estimates, experience replay, and a separate target network
+- **Environment:** CartPole, with LunarLander as an optional extension
+- **Activity:** train a DQN and inspect how replay and target updates affect its learning curve
+- **Deliverable:** a trained CartPole agent and a documented training graph
+- **Planned materials:** `week11-dqn`
 
-## Week 12 — Actor-Critic Methods
-- **Concepts:** combining value and policy learning, advantage estimation
+## Week 12 — Learn a Policy Directly
+
+- **Concepts:** policy probabilities, sampled actions, policy gradients, and reward-weighted updates
+- **Environment:** CartPole revisited
+- **Activity:** implement REINFORCE and compare its behavior with the Week 11 value-based agent
+- **Deliverable:** a trained policy and a focused comparison with DQN
+- **Planned materials:** `week12-policy-gradients`
+
+## Week 13 — Combine a Policy and a Value Estimate
+
+- **Concepts:** actor, critic, baseline, and advantage as “better or worse than expected”
 - **Environment:** LunarLander or Pendulum
-- **Activity:** implement a basic actor-critic agent
-- **Deliverable:** trained actor-critic agent + comparison to Week 11 results
+- **Activity:** let one component choose actions while another evaluates them
+- **Deliverable:** a basic actor-critic agent and an explanation of both components' jobs
+- **Planned materials:** `week13-actor-critic`
 
-## Week 13 — Modern Policy Optimization: PPO and Trust Regions
-- **Concepts:** trust regions, clipped objectives, why PPO is stable
-- **Environment:** LunarLander / BipedalWalker (via Stable-Baselines3)
-- **Activity:** use SB3 to train PPO, focus on hyperparameters and interpreting training curves (not from-scratch implementation)
-- **Deliverable:** tuned PPO run + short hyperparameter sensitivity report
+## Week 14 — Use PPO and Evaluate Training Carefully
 
-<!-- ## Week 14 — Imitation Learning, Offline RL, and Dataset Shift (optional)
-- **Concepts:** behavior cloning, distributional shift, learning from fixed datasets
-- **Environment:** custom toy navigation/driving env with scripted "expert" trajectories
-- **Activity:** train a behavior-cloned policy, deliberately induce and observe dataset shift failures
-- **Deliverable:** behavior cloning demo + written analysis of a failure mode -->
+- **Concepts:** limiting policy changes, clipped updates, hyperparameters, evaluation runs, and random seeds
+- **Environment:** LunarLander or another suitable continuous-control task
+- **Activity:** train PPO with Stable-Baselines3 and vary one setting at a time
+- **Deliverable:** a reproducible PPO experiment with learning and evaluation graphs
+- **Planned materials:** `week14-ppo-evaluation`
 
-## Week 15 — Safety, Partial Observability, Evaluation, and Final Projects
-- **Concepts:** reward hacking, partial observability, evaluation methodology
-- **Environment:** student's choice (any Gymnasium env, or a safety-focused variant of a prior env)
-- **Activity:** final project — apply a method from the course, or investigate a safety/robustness question
-- **Deliverable:** final project presentation/report
+## Week 15 — Safety, Partial Information, and Final Projects
+
+- **Concepts:** reward hacking, incomplete observations, distribution shift, and reliable evaluation
+- **Environment:** a prior environment or another approved Gymnasium environment
+- **Activity:** investigate a learning method or a safety and evaluation question
+- **Deliverable:** a final project, demonstration, and evidence-backed reflection
+- **Planned materials:** `week15-safety-final-projects`
 
 ---
 
-## Core Packages
-- **Gymnasium** — standardized environments (Blackjack, FrozenLake, CliffWalking, MountainCar, CartPole, LunarLander, BipedalWalker)
-- **Custom environments** — Gridworld and bandits, hand-built for full transparency in early units
-- **Stable-Baselines3** — for PPO in Week 13
-- **Matplotlib** — value heatmaps, training curves, rendered rollouts throughout
+## Optional extension units
+
+If the course runs longer than 15 weeks, useful extensions include:
+
+- first-visit versus every-visit Monte Carlo learning;
+- eligibility traces and multi-step targets;
+- imitation learning and behavior cloning;
+- offline reinforcement learning and dataset shift;
+- partial observability and memory;
+- reward design and reward hacking;
+- multi-agent environments;
+- additional time for final-project experiments and presentations.
+
+## Core packages
+
+- **Python standard library** — early bandit and Gridworld implementations
+- **Matplotlib** — distributions, value maps, learning curves, and comparisons
+- **Gymnasium** — CliffWalking, MountainCar, CartPole, and later environments
+- **NumPy** — arrays and numerical operations when table size grows
+- **Stable-Baselines3** — PPO and selected later-course comparisons
+
+The early weeks intentionally avoid requiring Gymnasium or deep-learning
+packages. They are introduced only when the environment or method benefits
+from them.

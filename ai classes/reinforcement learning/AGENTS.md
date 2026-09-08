@@ -31,8 +31,8 @@ in structure, tone, and difficulty progression.
 
 Each topic (one per week in the syllabus) gets its own top-level directory,
 named `weekNN-topic-slug` (zero-padded week number + short kebab-case
-topic name), e.g. `week01-bandits`, `week07-sarsa-qlearning`,
-`week13-ppo`.
+topic name), e.g. `week01-bandits`, `week07-action-values-qlearning`,
+`week14-ppo-evaluation`.
 
 ---
 
@@ -194,20 +194,20 @@ mathematics or technical language of reinforcement learning.
 
 | Week | Topic | Directory |
 |---|---|---|
-| 1 | What is RL? (Multi-armed bandits) | `week01-bandits` |
-| 2 | Markov Decision Processes | `week02-mdps` |
-| 3 | Value functions and Bellman equations | `week03-value-functions` |
-| 4 | Bellman optimality and dynamic programming | `week04-dynamic-programming` |
-| 5 | Monte Carlo methods | `week05-monte-carlo` |
-| 6 | Temporal-difference learning | `week06-td-learning` |
-| 7 | Model-free control: SARSA and Q-learning | `week07-sarsa-qlearning` |
+| 1 | Build a multi-armed bandit | `week01-bandits` |
+| 2 | Train an agent on the bandit | `week02-bandit-agent-v1` |
+| 3 | Build a Gridworld environment | `week03-gridworld-v1` |
+| 4 | Understand state values | `week04-state-values-v1` |
+| 5 | Learn state values from complete episodes | `week05-state-value-learning-v1` |
+| 6 | Learn state values after each step | `week06-step-value-learning-v1` |
+| 7 | Learn action values and improve a policy | `week07-action-values-qlearning` |
 | 8 | Exploration | `week08-exploration` |
-| 9 | Function approximation | `week09-function-approximation` |
-| 10 | Deep Q-learning | `week10-dqn` |
-| 11 | Policy gradients | `week11-policy-gradients` |
-| 12 | Actor-critic methods | `week12-actor-critic` |
-| 13 | Modern policy optimization: PPO and trust regions | `week13-ppo` |
-| 14 | Imitation learning, offline RL, dataset shift | `week14-imitation-offline-rl` |
+| 9 | Compare SARSA and Q-learning | `week09-sarsa-qlearning` |
+| 10 | Function approximation | `week10-function-approximation` |
+| 11 | Deep Q-learning | `week11-dqn` |
+| 12 | Policy gradients | `week12-policy-gradients` |
+| 13 | Actor-critic methods | `week13-actor-critic` |
+| 14 | PPO and careful evaluation | `week14-ppo-evaluation` |
 | 15 | Safety, partial observability, evaluation, final projects | `week15-safety-final-projects` |
 
 ---
